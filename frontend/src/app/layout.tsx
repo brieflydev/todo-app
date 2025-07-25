@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import Link from "next/link";
+import { AppBar, Toolbar, Button, Box } from "@mui/material";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +26,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <AppBar position="static" color="default" elevation={1}>
+          <Toolbar>
+            <Box sx={{ flexGrow: 1 }}>
+              <Button component={Link} href="/" color="inherit">Home</Button>
+              <Button component={Link} href="/register" color="inherit">Register</Button>
+              <Button component={Link} href="/login" color="inherit">Login</Button>
+              <Button component={Link} href="/logout" color="inherit">Logout</Button>
+            </Box>
+          </Toolbar>
+        </AppBar>
         {children}
       </body>
     </html>
