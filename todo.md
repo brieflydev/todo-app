@@ -1,0 +1,2 @@
+- users see each others todos - fix
+- class-validator in the DTOs

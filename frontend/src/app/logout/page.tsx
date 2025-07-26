@@ -7,7 +7,11 @@ export default function LogoutPage() {
 
   useEffect(() => {
     localStorage.removeItem('token');
+    window.dispatchEvent(new Event('storage'));
     setLoggedOut(true);
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1000);
   }, []);
 
   return (
