@@ -15,6 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import LoginPage from "./login/page";
 
 interface Todo {
   id: string;
@@ -29,6 +30,8 @@ export default function TodosPage() {
   const [loading, setLoading] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [checkedAuth, setCheckedAuth] = useState(false);
 
   const fetchTodos = async () => {
     setLoading(true);
@@ -42,8 +45,20 @@ export default function TodosPage() {
   };
 
   useEffect(() => {
-    fetchTodos();
+    if (typeof window !== 'undefined') {
+      setIsLoggedIn(!!localStorage.getItem('token'));
+      setCheckedAuth(true);
+      const handleStorage = () => setIsLoggedIn(!!localStorage.getItem('token'));
+      window.addEventListener('storage', handleStorage);
+      return () => window.removeEventListener('storage', handleStorage);
+    }
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchTodos();
+    }
+  }, [isLoggedIn]);
 
   const handleAdd = async () => {
     if (!newTodo.trim()) return;
@@ -95,6 +110,9 @@ export default function TodosPage() {
       // handle error
     }
   };
+
+  if (!checkedAuth) return null;
+  if (!isLoggedIn) return <LoginPage />;
 
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>

@@ -1,2 +1,0 @@
-- show logout only when logged in, don't allow to add todos without login
-- after login redirect to todos
