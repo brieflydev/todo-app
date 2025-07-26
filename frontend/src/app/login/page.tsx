@@ -8,7 +8,6 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [token, setToken] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +25,7 @@ export default function LoginPage() {
         throw new Error(data.message || "Login failed");
       }
       const data = await res.json();
-      setToken(data.access_token);
+      localStorage.setItem('token', data.access_token);
       setSuccess("Login successful!");
       setEmail("");
       setPassword("");
@@ -72,11 +71,6 @@ export default function LoginPage() {
       </form>
       {error && <Alert severity="error" sx={{ mt: 2 }}>{error}</Alert>}
       {success && <Alert severity="success" sx={{ mt: 2 }}>{success}</Alert>}
-      {token && (
-        <Alert severity="info" sx={{ mt: 2, wordBreak: 'break-all' }}>
-          JWT Token: {token}
-        </Alert>
-      )}
     </Box>
   );
 } 

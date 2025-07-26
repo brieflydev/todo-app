@@ -1,0 +1,2 @@
+- todo crud get/post/patch/delete
+- form to create/update/delete

@@ -31,9 +31,4 @@ export class AuthService {
     const token = await this.jwtService.signAsync(payload);
     return { access_token: token };
   }
-
-  async logout() {
-    // Stateless JWT: logout is handled on the client by deleting the token
-    return { message: 'Logged out' };
-  }
 }

@@ -6,8 +6,7 @@ export default function LogoutPage() {
   const [loggedOut, setLoggedOut] = useState(false);
 
   useEffect(() => {
-    // If using localStorage/sessionStorage for JWT, clear it here
-    // localStorage.removeItem('token');
+    localStorage.removeItem('token');
     setLoggedOut(true);
   }, []);
 
