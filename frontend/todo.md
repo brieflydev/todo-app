@@ -1,2 +1,2 @@
-- todo crud get/post/patch/delete
-- form to create/update/delete
+- show logout only when logged in, don't allow to add todos without login
+- after login redirect to todos
